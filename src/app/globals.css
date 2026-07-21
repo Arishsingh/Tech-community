@@ -383,8 +383,8 @@
   );
 }
 
-@media (max-width: 768px) {
-  /* Single column on mobile: mark drops below the text and shrinks. */
+@media (max-width: 900px) {
+  /* single column: mark drops below the text */
   .why-grid {
     grid-template-columns: 1fr;
   }
@@ -2219,5 +2219,105 @@ body {
     left: 8px;
     width: auto;
     height: min(70dvh, 520px);
+  }
+}
+
+/* ---- phone fixes ---- */
+
+html {
+  /* anchor targets otherwise land under the fixed nav */
+  scroll-padding-top: calc(var(--nav-h) + 12px);
+}
+
+/* kill the 300ms tap delay on anything interactive */
+button,
+a,
+input,
+[role="tab"] {
+  touch-action: manipulation;
+}
+
+/* iOS zooms the whole page when a focused input is under 16px */
+@media (max-width: 640px) {
+  .tp-field input,
+  .tp-add input,
+  .cw-input input {
+    font-size: 16px;
+  }
+}
+
+/* clear the home indicator / notch on fixed elements */
+.cw-fab {
+  bottom: calc(clamp(16px, 3vw, 28px) + env(safe-area-inset-bottom));
+}
+
+.cw-panel {
+  bottom: calc(clamp(16px, 3vw, 28px) + 64px + env(safe-area-inset-bottom));
+}
+
+.ft-base {
+  padding-bottom: calc(28px + env(safe-area-inset-bottom));
+}
+
+@media (max-width: 640px) {
+  /* hero copy needs a touch more room to breathe at phone widths */
+  .cw-fab {
+    width: 48px;
+    height: 48px;
+  }
+
+  /* bigger hit area on the hamburger without moving the icon */
+  header nav > button {
+    padding: 8px;
+    margin: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cw-panel {
+    /* full-width sheet, and never taller than the space above the fab */
+    right: 10px;
+    left: 10px;
+    width: auto;
+    height: min(
+      68dvh,
+      calc(100dvh - var(--nav-h) - 96px - env(safe-area-inset-bottom))
+    );
+  }
+
+  .showcase-card {
+    min-height: 240px;
+  }
+
+  .tp-card {
+    padding: 15px;
+  }
+
+  .tp-identity {
+    gap: 11px;
+  }
+
+  .tp-photo {
+    width: 54px;
+    height: 54px;
+  }
+
+  .faq-aside h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .ft-marquee span {
+    font-size: 2.7rem;
+  }
+
+  .tp-verified {
+    font-size: 8px;
+    padding: 6px 10px;
+  }
+
+  .why-mark svg {
+    width: 62px;
   }
 }

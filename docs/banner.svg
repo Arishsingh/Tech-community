@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="340" viewBox="0 0 1280 340" role="img" aria-label="Techies Community">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c2b21"/>
+      <stop offset="55%" stop-color="#071512"/>
+      <stop offset="100%" stop-color="#040a09"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="18%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#1c4d3a" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#1c4d3a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1280" height="340" fill="url(#bg)"/>
+  <rect width="1280" height="340" fill="url(#glow)"/>
+
+  <!-- corner cut, echoing the panels on the site -->
+  <path d="M1280 0 L1160 0 L1280 120 Z" fill="#000000"/>
+  <rect width="1280" height="2" fill="#7fe3c0" opacity="0.55"/>
+
+  <!-- equaliser bars -->
+  <g fill="#5ed29c">
+    <rect x="96" y="236" width="4" height="44" opacity="0.35"/>
+    <rect x="110" y="212" width="4" height="68" opacity="0.5"/>
+    <rect x="124" y="248" width="4" height="32" opacity="0.3"/>
+    <rect x="138" y="196" width="4" height="84" opacity="0.65"/>
+    <rect x="152" y="228" width="4" height="52" opacity="0.4"/>
+    <rect x="166" y="176" width="4" height="104" opacity="0.8"/>
+    <rect x="180" y="220" width="4" height="60" opacity="0.45"/>
+    <rect x="194" y="244" width="4" height="36" opacity="0.3"/>
+  </g>
+
+  <text x="96" y="150" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="86" font-weight="700" letter-spacing="-3" fill="#ffffff">
+    &lt;t&gt; Techies<tspan fill="#98a2b3">Community</tspan>
+  </text>
+
+  <text x="100" y="196" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="21" letter-spacing="6" fill="#7fe3c0">
+    BUILD IN THE OPEN. SHIP TOGETHER.
+  </text>
+</svg>

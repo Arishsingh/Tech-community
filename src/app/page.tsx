@@ -6,6 +6,7 @@ import { BuildSection } from "@/components/build-section";
 import { TechPass } from "@/components/techpass";
 import { Faq } from "@/components/faq";
 import { SiteFooter } from "@/components/site-footer";
+import { ChatWidget } from "@/components/chat-widget";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <TechPass />
       <Faq />
       <SiteFooter />
+      <ChatWidget />
     </>
   );
 }

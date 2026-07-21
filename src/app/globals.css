@@ -1980,3 +1980,244 @@ body {
     transform: none;
   }
 }
+
+/* chat widget */
+.cw-fab {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  border-radius: 50%;
+  background: #141817;
+  color: #ffffff;
+  cursor: pointer;
+  /* hairline ring, otherwise it disappears against the black page */
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    0 12px 30px -10px rgba(0, 0, 0, 0.8);
+  transition: transform 180ms var(--ease-out-strong);
+}
+
+.cw-fab:hover {
+  transform: scale(1.05);
+}
+
+.cw-fab:active {
+  transform: scale(0.96);
+}
+
+.cw-panel {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: calc(clamp(16px, 3vw, 28px) + 64px);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  width: min(370px, calc(100vw - 32px));
+  height: min(520px, calc(100dvh - 140px));
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0a0d0c;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 30px 70px -20px rgba(0, 0, 0, 0.9);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.98);
+  transform-origin: bottom right;
+  transition:
+    opacity 200ms var(--ease-out-strong),
+    transform 200ms var(--ease-out-strong),
+    visibility 200ms;
+}
+
+.cw-panel[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.cw-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cw-head strong {
+  display: block;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.cw-head span {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11px;
+}
+
+.cw-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5ed29c;
+  box-shadow: 0 0 10px #5ed29c;
+}
+
+.cw-log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cw-msg {
+  margin: 0;
+  max-width: 85%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.cw-msg[data-role="assistant"] {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.85);
+  border-bottom-left-radius: 5px;
+}
+
+.cw-msg[data-role="user"] {
+  align-self: flex-end;
+  background: #5ed29c;
+  color: #04140d;
+  border-bottom-right-radius: 5px;
+}
+
+.cw-typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.cw-typing i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  animation: cw-bounce 1.1s infinite;
+}
+
+.cw-typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.cw-typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes cw-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.cw-openers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 4px;
+}
+
+.cw-openers button {
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.cw-openers button:hover {
+  color: #fff;
+  background: rgba(94, 210, 156, 0.16);
+}
+
+.cw-input {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cw-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font: inherit;
+  font-size: 13.5px;
+}
+
+.cw-input input:focus-visible {
+  outline: 2px solid rgba(94, 210, 156, 0.55);
+  outline-offset: 1px;
+}
+
+.cw-input button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  border: 0;
+  border-radius: 10px;
+  background: #5ed29c;
+  color: #04140d;
+  cursor: pointer;
+}
+
+.cw-input button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cw-panel,
+  .cw-fab {
+    transition: none;
+  }
+
+  .cw-typing i {
+    animation: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .cw-panel {
+    right: 8px;
+    left: 8px;
+    width: auto;
+    height: min(70dvh, 520px);
+  }
+}

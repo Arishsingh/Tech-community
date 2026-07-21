@@ -15,26 +15,45 @@ export function HlsVideo({
     const video = videoRef.current;
     if (!video) return;
 
-    // safari handles hls natively
-    if (video.canPlayType("application/vnd.apple.mpegurl")) {
-      video.src = src;
-      return;
-    }
-
     let destroy: (() => void) | undefined;
     let cancelled = false;
 
-    import("hls.js").then(({ default: Hls }) => {
-      if (cancelled || !Hls.isSupported()) return;
-      // workers are flaky in sandboxed frames
-      const hls = new Hls({ enableWorker: false });
-      hls.loadSource(src);
-      hls.attachMedia(video);
-      destroy = () => hls.destroy();
-    });
+    const start = () => {
+      // safari handles hls natively
+      if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = src;
+        video.play().catch(() => {});
+        return;
+      }
+
+      import("hls.js").then(({ default: Hls }) => {
+        if (cancelled || !Hls.isSupported()) return;
+        // workers are flaky in sandboxed frames
+        const hls = new Hls({ enableWorker: false });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+        destroy = () => hls.destroy();
+      });
+    };
+
+    // hold the hls.js chunk + first segments until the browser is done with
+    // the initial paint
+    const ric = window.requestIdleCallback;
+    let handle: number;
+
+    if (typeof ric === "function") {
+      handle = ric(start, { timeout: 1500 });
+    } else {
+      handle = window.setTimeout(start, 250);
+    }
 
     return () => {
       cancelled = true;
+      if (typeof ric === "function") {
+        window.cancelIdleCallback(handle);
+      } else {
+        clearTimeout(handle);
+      }
       destroy?.();
     };
   }, [src]);
@@ -47,7 +66,7 @@ export function HlsVideo({
       muted
       loop
       playsInline
-      preload="auto"
+      preload="none"
     />
   );
 }

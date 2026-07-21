@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { LazyVideo } from "@/components/lazy-video";
 
 // palette climbs from near-black toward the accent, one hue per panel
 const PANELS = [
@@ -195,14 +196,7 @@ function Panel({
           <p className="why-body">{body}</p>
 
           <div className="why-video">
-            <video
-              src={PANEL_VIDEO}
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="metadata"
-            />
+            <LazyVideo src={PANEL_VIDEO} />
             <span aria-hidden className="why-video-tint" />
           </div>
         </div>

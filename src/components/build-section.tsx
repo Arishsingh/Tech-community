@@ -146,7 +146,13 @@ export function BuildSection() {
               {CARDS.map((card) => (
                 <article key={card.title} className="build-card">
                   <span aria-hidden className="build-thumb">
-                    <Image src={card.img} alt="" fill sizes="360px" />
+                    <Image
+                      src={card.img}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 78vw, 320px"
+                      placeholder="blur"
+                    />
                   </span>
                   <h3>{card.title}</h3>
                   <p>{card.body}</p>

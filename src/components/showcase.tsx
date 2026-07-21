@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import heroFlowers from "@/assets/hero-flowers.png";
+import { LazyVideo } from "@/components/lazy-video";
 
 const VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260315_073750_51473149-4350-4920-ae24-c8214286f323.mp4";
@@ -101,19 +102,16 @@ export function Showcase() {
               <span aria-hidden className="showcase-mesh" />
             )}
 
-            {card.kind === "video" && (
-              <video
-                src={VIDEO}
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              />
-            )}
+            {card.kind === "video" && <LazyVideo src={VIDEO} />}
 
             {card.kind === "image" && (
-              <Image src={heroFlowers} alt="" fill sizes="33vw" />
+              <Image
+                src={heroFlowers}
+                alt=""
+                fill
+                sizes="(max-width: 900px) 90vw, 33vw"
+                placeholder="blur"
+              />
             )}
 
             <span aria-hidden className="showcase-scrim" />

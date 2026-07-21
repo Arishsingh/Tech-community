@@ -1,9 +1,6 @@
 import type { CSSProperties } from "react";
 
-/* The four panels read as a single climb out of black toward the accent:
-   near-black → deep teal → forest → full accent. Each carries its own accent
-   hue so the stack shifts temperature as you scroll rather than repeating one
-   green four times. */
+// palette climbs from near-black toward the accent, one hue per panel
 const PANELS = [
   {
     id: "panel-01",
@@ -55,12 +52,9 @@ const PANELS = [
   },
 ];
 
-/* Step and nav height live in CSS (--stack-step / --nav-h) so they can shrink
-   on phones; the component only passes each panel's index. */
 const PAGE_BG = "#000000";
 
-/* Plain mp4 rather than the hero's HLS stream: four simultaneous hls.js
-   instances would each spin up their own MSE buffer. */
+// plain mp4 here - four hls.js instances would each own an MSE buffer
 const PANEL_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260315_073750_51473149-4350-4920-ae24-c8214286f323.mp4";
 
@@ -149,7 +143,7 @@ function Panel({
         } as CSSProperties
       }
     >
-      {/* Accent bloom, top-right — gives each panel a light source */}
+      {/* light source, top right */}
       <span
         aria-hidden
         className="why-bloom"
@@ -158,7 +152,7 @@ function Panel({
         }}
       />
 
-      {/* 45° bevel, filled with the page colour so it reads as a cut */}
+      {/* corner cut */}
       <span
         aria-hidden
         style={{
@@ -175,8 +169,7 @@ function Panel({
 
       <div className="why-grid">
         <div className="why-left">
-          {/* Index + title share one row so both survive in the collapsed
-              tab strip; the label sits at the far right of the same row. */}
+          {/* one row, so both survive in the collapsed tab strip */}
           <a href={`#${id}`} className="why-head">
             <span className="why-head-main">
               <span className="why-index" style={{ color: accent }}>
@@ -221,8 +214,6 @@ function Panel({
     </article>
   );
 }
-
-/* ---- Marks ---- */
 
 function Chevrons({ color }: { color: string }) {
   return (

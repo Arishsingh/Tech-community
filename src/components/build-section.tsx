@@ -43,8 +43,7 @@ const CARDS = [
   },
 ];
 
-/* Fraction of the remaining distance covered per frame — turns the
-   scrollbar's jittery deltas into continuous motion. */
+// per-frame easing factor for the rail
 const EASE = 0.12;
 
 export function BuildSection() {
@@ -58,8 +57,7 @@ export function BuildSection() {
     const t = track.current;
     if (!o || !v || !t) return;
 
-    // Opt out of scroll-jacking for reduced-motion users and on phones,
-    // where a native swipeable rail is both faster and more expected.
+    // no scroll-jacking on touch or for reduced-motion users
     const optOut = window.matchMedia(
       "(prefers-reduced-motion: reduce), (max-width: 640px)",
     );
@@ -75,8 +73,7 @@ export function BuildSection() {
     let max = 0;
 
     const measure = () => {
-      // Overflow is measured against the rail's own viewport, not the window,
-      // because the rail only occupies the column beside the intro.
+      // measured against the rail's viewport, not the window
       max = Math.max(0, t.scrollWidth - v.clientWidth);
       o.style.height = `${window.innerHeight + max}px`;
     };
@@ -118,7 +115,7 @@ export function BuildSection() {
 
   return (
     <section className="build" ref={outer}>
-      {/* Everything stays pinned for one viewport while the rail pans */}
+      {/* pinned while the rail pans */}
       <div className="build-pin">
         <div className="build-head">
           <Mark />
@@ -180,7 +177,6 @@ export function BuildSection() {
   );
 }
 
-/* Rotated cross-bar mark, echoing the reference's lockup */
 function Mark() {
   return (
     <svg

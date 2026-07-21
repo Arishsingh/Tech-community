@@ -15,7 +15,7 @@ export function HlsVideo({
     const video = videoRef.current;
     if (!video) return;
 
-    // Safari plays HLS natively; everyone else needs hls.js.
+    // safari handles hls natively
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
       video.src = src;
       return;
@@ -26,7 +26,7 @@ export function HlsVideo({
 
     import("hls.js").then(({ default: Hls }) => {
       if (cancelled || !Hls.isSupported()) return;
-      // enableWorker: false — web workers are unreliable in sandboxed frames.
+      // workers are flaky in sandboxed frames
       const hls = new Hls({ enableWorker: false });
       hls.loadSource(src);
       hls.attachMedia(video);

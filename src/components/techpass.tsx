@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
-/* lucide-react v1 dropped brand glyphs, so these are semantic stand-ins —
-   the aria-labels remain accurate. */
+// lucide v1 has no brand glyphs, so these stand in
 import {
   Check,
   Download,
@@ -39,8 +38,7 @@ type StyleId = (typeof STYLES)[number]["id"];
 
 const MAX_TAGS = 6;
 
-/* Deterministic so the server and client render the same pattern — this is a
-   decorative matrix, not a scannable QR code. */
+// decorative matrix, not a real QR. seeded so ssr and client agree
 function matrixCells(seed: string) {
   const cells: boolean[] = [];
   let h = 2166136261;
@@ -79,7 +77,7 @@ export function TechPass() {
   const [copied, setCopied] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // Blob URLs leak unless revoked when replaced or unmounted.
+  // revoke blob urls or they leak
   useEffect(() => {
     return () => {
       if (avatar) URL.revokeObjectURL(avatar);
@@ -148,7 +146,6 @@ export function TechPass() {
       </header>
 
       <div className="tp-cols">
-        {/* ---- Form ---- */}
         <div className="tp-panel">
           <div className="tp-panel-head">
             <h3>
@@ -303,7 +300,7 @@ export function TechPass() {
           </div>
         </div>
 
-        {/* ---- Live preview ---- */}
+        {/* preview */}
         <div className="tp-preview">
           <span className="tp-preview-label">● Live card preview</span>
 

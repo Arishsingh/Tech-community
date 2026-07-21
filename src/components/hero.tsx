@@ -6,18 +6,17 @@ const STREAM =
 export function Hero() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-[#000000]">
-      {/* Background video */}
+      {/* bg video */}
       <HlsVideo
         src={STREAM}
         className="absolute inset-0 size-full object-contain object-center"
       />
 
-      {/* Readability gradients. Both fall off early (35% / 30%) so the wash
-          sits behind the text column and the rest of the frame stays clear. */}
+      {/* readability gradients */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-[#000000]/35 via-35% to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/85 via-[#000000]/15 via-30% to-transparent" />
 
-      {/* Vertical grid lines */}
+      {/* grid lines */}
       <div className="pointer-events-none absolute inset-0 hidden md:block">
         {["25%", "50%", "75%"].map((left) => (
           <div
@@ -28,10 +27,7 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Content */}
-      {/* Height, column flow and end-alignment are inline: the Tailwind
-          equivalents (h-screen / flex-col / mt-auto) were being dropped, which
-          collapsed the container and let the text overlap the nav. */}
+      {/* inline layout: the tailwind equivalents kept getting dropped here */}
       <div
         className="relative z-10"
         style={{
@@ -47,7 +43,6 @@ export function Hero() {
           paddingRight: "clamp(24px, 4vw, 56px)",
         }}
       >
-        {/* justify-content: flex-end on the parent bottom-anchors this. */}
         <div>
           <p
             className="rise font-display font-bold uppercase text-[#5ed29c]"
@@ -67,12 +62,8 @@ export function Hero() {
             style={
               {
                 "--rise-delay": "440ms",
-                /* Inline rather than arbitrary Tailwind classes: these are the
-                   values a stale JIT scan silently dropped before. */
                 marginTop: "26px",
                 fontSize: "clamp(2.25rem, 7.5vw, 4.5rem)",
-                /* Inline: the h1 base rule (font-weight 500) was beating the
-                   font-extrabold utility. */
                 fontWeight: 800,
                 lineHeight: 1.08,
                 letterSpacing: "-0.02em",

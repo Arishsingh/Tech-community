@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { fontVariables } from "@/lib/fonts";
-import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Bloom — AI-powered floral design",
+  title: "Techies Community",
   description:
-    "Innovating the spirit of bloom AI. Generative plant and floral design.",
+    "An autonomous engineering ecosystem for builders who forge their own paths.",
 };
 
 export default function RootLayout({
@@ -15,14 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${fontVariables} h-full antialiased`}
-      suppressHydrationWarning
-    >
-      <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
-      </body>
+    <html lang="en" className={`${fontVariables} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
 }

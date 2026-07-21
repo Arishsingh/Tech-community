@@ -108,7 +108,7 @@ export function SiteFooter() {
         </nav>
       </div>
 
-      {/* Oversized wordmark, marqueeing across the base of the page */}
+      {/* marquee wordmark */}
       <div className="ft-marquee" aria-hidden>
         <div className="ft-marquee-track">
           <span>techies community</span>

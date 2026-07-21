@@ -79,9 +79,8 @@ export function Faq() {
                   </button>
                 </h3>
 
-                {/* 0fr → 1fr animates height without measuring the content.
-                    Collapsed state uses visibility (not `hidden`) so it can
-                    transition while still leaving the a11y tree. */}
+                {/* 0fr -> 1fr animates height; visibility keeps it out of
+                    the a11y tree without killing the transition */}
                 <div
                   className="faq-panel"
                   id={`${uid}-panel-${i}`}

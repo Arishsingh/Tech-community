@@ -24,8 +24,7 @@ export function SiteHeader() {
 
   return (
     <>
-      {/* Fixed so it rides over every section, with a blurred scrim to stay
-          legible against the video, the panels and the card grids. */}
+      {/* fixed over every section */}
       <header
         style={{
           position: "fixed",
@@ -106,7 +105,7 @@ export function SiteHeader() {
         </nav>
       </header>
 
-      {/* Mobile menu — kept mounted so it can animate out */}
+      {/* kept mounted so it can animate out */}
       <div
         inert={!open}
         aria-hidden={!open}
@@ -147,7 +146,6 @@ export function SiteHeader() {
   );
 }
 
-/* Glossy sphere + <t> bracket glyph, then the two-tone wordmark. */
 function Logo() {
   return (
     <span style={{ display: "flex", alignItems: "center" }}>
